@@ -21,6 +21,6 @@
   },
   "sovereign_attestation": {
     "signed_by": "did:max:sovereign:hiel-node-04",
-    "ml_dsa_65_sig_b64": "<BASE64_SIGNATURE>"
+    "ml_dsa_65_sig_b64": "aGllbF9ub2RlXzA0X21sX2RzYV82NV9zaWduYXR1cmVfYmFzZTY0"
   }
 }

@@ -4,9 +4,9 @@
   "subject_did": "did:max:sovereign:maxj-0x94f2",
   "custody_mode": "ZERO_CUSTODY_CLIENT_HELD",
   "lineage": {
-    "intent_hash_sha256": "a1b2c3d4e5f6...",
-    "ir_hash_sha256": "f6e5d4c3b2a1...",
-    "result_hash_sha256": "998877665544..."
+    "intent_hash_sha256": "a1b2c3d4e5f60123456789abcdef0123456789abcdef0123456789abcdef0123",
+    "ir_hash_sha256": "f6e5d4c3b2a10123456789abcdef0123456789abcdef0123456789abcdef0123",
+    "result_hash_sha256": "9988776655440123456789abcdef0123456789abcdef0123456789abcdef0123"
   },
   "policy_assertions": [
     "ZERO_PAID_STORAGE_R2_BYPASS",
@@ -14,7 +14,7 @@
     "HARDWARE_AGNOSTIC_IR_SIGNED"
   ],
   "signature_bundle": {
-    "ed25519": "<BASE64_SIGNATURE>",
-    "ml_dsa_65": "<BASE64_SIGNATURE>"
+    "ed25519": "ZWRyNTUxOV9wcm92ZW5hbmNlX3NpZ25hdHVyZV9iYXNlNjQ=",
+    "ml_dsa_65": "bWxfZHNhXzY1X3Byb3ZlbmFuY2Vfc2lnbmF0dXJlX2Jhc2U2NA=="
   }
 }

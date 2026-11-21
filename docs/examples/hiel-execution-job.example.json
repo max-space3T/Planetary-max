@@ -11,6 +11,24 @@
   },
   "payload_ir": {
     "ir_type": "MAX-Circuit-IR",
-    "circuit_id": "circ-9012-bell-mitigated"
+    "schema_version": "1.0.0",
+    "circuit_id": "circ-9012-bell-mitigated",
+    "source_ir_format": "OpenQASM 3.0",
+    "lowering_target_ir": "QIR-Base-Profile",
+    "num_qubits": 2,
+    "num_clbits": 2,
+    "source_program": "OPENQASM 3.0;\ninclude \"stdgates.inc\";\nqubit[2] q;\nbit[2] c;\nh q[0];\ncx q[0], q[1];\nc = measure q;",
+    "noise_and_mitigation_directives": {
+      "suite": "Error-and-Noise-Suite-v1",
+      "enable_zne": true,
+      "zne_scale_factors": [1.0, 1.5, 2.0],
+      "readout_error_mitigation": "M3_MATRIX_FREE",
+      "dynamical_decoupling": "XY4"
+    },
+    "execution_constraints": {
+      "max_shots": 4096,
+      "preferred_backend_class": "BLUE_QUANTUM_GPU_SIM_OR_QPU",
+      "max_circuit_depth": 64
+    }
   }
 }
