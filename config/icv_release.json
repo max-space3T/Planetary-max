@@ -1,0 +1,12 @@
+{
+  "release_version": "v1.1.0-tier-b-release",
+  "THEORY_STATUS": "FROZEN",
+  "project_id": "PROJECT_MC-001_MAXQGA",
+  "registry_id": "MAXQGA_FENREGISTRY_V1_20261016",
+  "expected_anchor_count": 18,
+  "supplied_anchor_count": 5,
+  "frozen_anchors_sha256": "1c869e518df4444f4c5b05393f07b9792ed3597d2475d52192ff6e8737669e58",
+  "_coderabbit_generated_metadata": {
+    "description": "Configuration assembled from the user-provided release specification; summary evidence has not been independently verified."
+  }
+}

@@ -1,0 +1,14 @@
+# The five listed anchors were supplied by the user; the other 13 are unavailable.
+registry_id: MAXQGA_FENREGISTRY_V1_20261016
+project_id: PROJECT_MC-001_MAXQGA
+theory_status: FROZEN
+expected_count: 18
+supplied_count: 5
+status: INCOMPLETE
+positions_file: positions_mx_ev.fen
+anchors:
+  - MX-EV-001
+  - MX-EV-002
+  - MX-EV-003
+  - MX-EV-004
+  - MX-EV-005
