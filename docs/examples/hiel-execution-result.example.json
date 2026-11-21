@@ -1,0 +1,26 @@
+{
+  "job_id": "hiel-job-5509",
+  "status": "COMPLETED_MITIGATED",
+  "executed_backend": "blue-quantum://gpu-tensor-sim-01",
+  "telemetry": {
+    "queue_time_ms": 1.8,
+    "execution_time_ms": 14.2,
+    "raw_fidelity_estimate": 0.941,
+    "mitigated_fidelity_estimate": 0.987
+  },
+  "results": {
+    "mitigated_expectation_values": {
+      "Z0Z1": 0.9842
+    },
+    "quasi_probability_distribution": {
+      "00": 0.493,
+      "11": 0.491,
+      "01": 0.008,
+      "10": 0.008
+    }
+  },
+  "sovereign_attestation": {
+    "signed_by": "did:max:sovereign:hiel-node-04",
+    "ml_dsa_65_sig_b64": "aGllbF9ub2RlXzA0X21sX2RzYV82NV9zaWduYXR1cmVfYmFzZTY0"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "protocol": "P-STEP/1.0",
+  "frame_id": "urn:uuid:8f4e2a10-9c3b-4d7e-a120-55b9e01c7742",
+  "timestamp_utc": "2026-11-20T22:39:00Z",
+  "routing": {
+    "source_node": "edge://planetary-max/node-us-east-01",
+    "target_node": "hiel://quantum-broker/cluster-04",
+    "hop_ttl": 8,
+    "telecom_slice": "MAX-TELECOM-LOW-LATENCY"
+  },
+  "crypto_header": {
+    "kem_algorithm": "X25519MLKEM768",
+    "kem_key_id": "kem-pub-768-99a1b4",
+    "kem_ciphertext_b64": "bWxfa2VtXzc2OF9jaXBoZXJ0ZXh0X3BsYWNlaG9sZGVyXzEwODhi==",
+    "aead_cipher": "AES-256-GCM",
+    "nonce_b64": "OWJpdG5vbmNlMTIz"
+  },
+  "ciphertext_payload_b64": "Z2NtX2VuY3J5cHRlZF9wYXlsb2FkX2J5dGVzX2Jhc2U2NA==",
+  "sovereign_attestation": {
+    "signer_did": "did:max:sovereign:maxj-0x94f2",
+    "sig_algorithm": "Hybrid-Ed25519-ML-DSA-65",
+    "ed25519_sig_b64": "ZWRyNTUxOV9zaWduYXR1cmVfNjRieXRlc19iYXNlNjQ=",
+    "ml_dsa_65_sig_b64": "bWxfZHNhXzY1X3NpZ25hdHVyZV8zMzA5Ynl0ZXNfYmFzZTY0",
+    "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "task_dag_id": "dag-88201",
+  "routing_decision": {
+    "classical_edge_nodes": ["SubstrateDO-01"],
+    "quantum_subroutine_emitted": true,
+    "ir_type": "MAX-QUBO-IR",
+    "ir_ref": "qubo-opt-2026-1120-01"
+  },
+  "sovereign_receipt_id": "rcpt-0x94f2-88201"
+}

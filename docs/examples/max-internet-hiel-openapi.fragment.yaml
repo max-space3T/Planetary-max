@@ -1,0 +1,455 @@
+paths:
+  /transport/encapsulate:
+    post:
+      operationId: encapsulatePStepFrame
+      summary: IF-04 — Wrap canonical payload in MAX-Internet P-STEP/1.0 PQC envelope
+      tags:
+        - MAX-Internet
+        - MAX-SOVEREIGN
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PStepEncapsulateRequest'
+      responses:
+        '200':
+          description: Hybrid ML-KEM-768 + ML-DSA-65 P-STEP/1.0 frame created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PStepFrameEnvelope'
+        '426':
+          description: PQC handshake downgrade rejected (ERR_PQC_HANDSHAKE_DOWNGRADE)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MaxFailClosedError'
+
+  /hiel/execute:
+    post:
+      operationId: executeHielQuantumJob
+      summary: IF-05 — Execute MAX-Circuit-IR or MAX-QUBO-IR through HIEL with noise mitigation
+      tags:
+        - HIEL
+        - MAX Quantum
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HielExecuteRequest'
+      responses:
+        '200':
+          description: Mitigated quantum or GPU-simulated result with sovereign attestation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HielExecuteResponse'
+        '503':
+          description: Hardware fidelity below threshold and fallback exhausted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MaxFailClosedError'
+
+webhooks:
+  sovereignProvenanceCommitted:
+    post:
+      summary: Asynchronous provenance receipt notification to BEEMAX (portal-os1)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MaxSovereignProvenanceReceipt'
+      responses:
+        '200':
+          description: Provenance receipt acknowledged by workspace frontend
+
+components:
+  schemas:
+    MaxSovereignProvenanceReceipt:
+      type: object
+      required:
+        - receipt_version
+        - holding_umbrella
+        - subject_did
+        - custody_mode
+        - lineage
+        - policy_assertions
+        - signature_bundle
+      properties:
+        receipt_version:
+          type: string
+          const: "DAT-JURREAUISM-v1"
+        holding_umbrella:
+          type: string
+          const: "OUR umbrella"
+        subject_did:
+          type: string
+          pattern: "^did:max:sovereign:[a-z0-9-]+$"
+        custody_mode:
+          type: string
+          const: "ZERO_CUSTODY_CLIENT_HELD"
+        lineage:
+          type: object
+          required:
+            - intent_hash_sha256
+            - ir_hash_sha256
+            - result_hash_sha256
+          properties:
+            intent_hash_sha256:
+              type: string
+              pattern: "^[a-f0-9]{64}$"
+            ir_hash_sha256:
+              type: string
+              pattern: "^[a-f0-9]{64}$"
+            result_hash_sha256:
+              type: string
+              pattern: "^[a-f0-9]{64}$"
+        policy_assertions:
+          type: array
+          items:
+            type: string
+            enum:
+              - ZERO_PAID_STORAGE_R2_BYPASS
+              - HNDL_PQC_TRANSPORT_VERIFIED
+              - HARDWARE_AGNOSTIC_IR_SIGNED
+        signature_bundle:
+          type: object
+          required:
+            - ed25519
+            - ml_dsa_65
+          properties:
+            ed25519:
+              type: string
+              contentEncoding: base64
+            ml_dsa_65:
+              type: string
+              contentEncoding: base64
+
+    PStepEncapsulateRequest:
+      type: object
+      required:
+        - source_node
+        - target_node
+        - canonical_payload_b64
+        - signer_did
+      properties:
+        source_node:
+          type: string
+        target_node:
+          type: string
+        canonical_payload_b64:
+          type: string
+          contentEncoding: base64
+        signer_did:
+          type: string
+
+    PStepFrameEnvelope:
+      type: object
+      required:
+        - protocol
+        - frame_id
+        - timestamp_utc
+        - routing
+        - crypto_header
+        - ciphertext_payload_b64
+        - sovereign_attestation
+      properties:
+        protocol:
+          type: string
+          const: "P-STEP/1.0"
+        frame_id:
+          type: string
+          format: uri
+        timestamp_utc:
+          type: string
+          format: date-time
+        routing:
+          type: object
+          required:
+            - source_node
+            - target_node
+            - hop_ttl
+            - telecom_slice
+          properties:
+            source_node:
+              type: string
+            target_node:
+              type: string
+            hop_ttl:
+              type: integer
+              minimum: 1
+              maximum: 32
+            telecom_slice:
+              type: string
+        crypto_header:
+          type: object
+          required:
+            - kem_algorithm
+            - kem_key_id
+            - kem_ciphertext_b64
+            - aead_cipher
+            - nonce_b64
+          properties:
+            kem_algorithm:
+              type: string
+              const: "X25519MLKEM768"
+            kem_key_id:
+              type: string
+            kem_ciphertext_b64:
+              type: string
+              contentEncoding: base64
+            aead_cipher:
+              type: string
+              const: "AES-256-GCM"
+            nonce_b64:
+              type: string
+              contentEncoding: base64
+        ciphertext_payload_b64:
+          type: string
+          contentEncoding: base64
+        sovereign_attestation:
+          type: object
+          required:
+            - signer_did
+            - sig_algorithm
+            - ed25519_sig_b64
+            - ml_dsa_65_sig_b64
+            - payload_sha256
+          properties:
+            signer_did:
+              type: string
+            sig_algorithm:
+              type: string
+              const: "Hybrid-Ed25519-ML-DSA-65"
+            ed25519_sig_b64:
+              type: string
+              contentEncoding: base64
+            ml_dsa_65_sig_b64:
+              type: string
+              contentEncoding: base64
+            payload_sha256:
+              type: string
+              pattern: "^[a-f0-9]{64}$"
+
+    MaxQuboIR:
+      type: object
+      required:
+        - ir_type
+        - schema_version
+        - problem_id
+        - num_variables
+        - linear_biases
+        - quadratic_couplings
+        - offset
+      properties:
+        ir_type:
+          type: string
+          const: "MAX-QUBO-IR"
+        schema_version:
+          type: string
+        problem_id:
+          type: string
+        num_variables:
+          type: integer
+          minimum: 1
+        linear_biases:
+          type: object
+          additionalProperties:
+            type: number
+        quadratic_couplings:
+          type: array
+          items:
+            type: object
+            required: [i, j, weight]
+            properties:
+              i:
+                type: integer
+              j:
+                type: integer
+              weight:
+                type: number
+        offset:
+          type: number
+        solver_hints:
+          type: object
+          properties:
+            target_ansatz:
+              type: string
+              enum: ["QAOA", "VQE", "SIMULATED_ANNEALING"]
+            p_layers:
+              type: integer
+            classical_pre_reduction:
+              type: boolean
+
+    MaxCircuitIR:
+      type: object
+      required:
+        - ir_type
+        - schema_version
+        - circuit_id
+        - source_ir_format
+        - lowering_target_ir
+        - num_qubits
+        - num_clbits
+        - source_program
+        - noise_and_mitigation_directives
+        - execution_constraints
+      properties:
+        ir_type:
+          type: string
+          const: "MAX-Circuit-IR"
+        schema_version:
+          type: string
+        circuit_id:
+          type: string
+        source_ir_format:
+          type: string
+          enum: ["OpenQASM 3.0", "QIR-Base-Profile"]
+        lowering_target_ir:
+          type: string
+          enum: ["QIR-Base-Profile", "QIR-Adaptive-Profile"]
+        num_qubits:
+          type: integer
+          minimum: 1
+        num_clbits:
+          type: integer
+          minimum: 0
+        source_program:
+          type: string
+        noise_and_mitigation_directives:
+          type: object
+          required:
+            - suite
+            - enable_zne
+            - zne_scale_factors
+            - readout_error_mitigation
+            - dynamical_decoupling
+          properties:
+            suite:
+              type: string
+              const: "Error-and-Noise-Suite-v1"
+            enable_zne:
+              type: boolean
+            zne_scale_factors:
+              type: array
+              items:
+                type: number
+            readout_error_mitigation:
+              type: string
+              enum: ["M3_MATRIX_FREE", "TENSOR_PRODUCT_MITIGATION", "NONE"]
+            dynamical_decoupling:
+              type: string
+              enum: ["XY4", "CPMG", "NONE"]
+        execution_constraints:
+          type: object
+          required:
+            - max_shots
+            - preferred_backend_class
+            - max_circuit_depth
+          properties:
+            max_shots:
+              type: integer
+              minimum: 1
+            preferred_backend_class:
+              type: string
+              enum:
+                - BLUE_QUANTUM_GPU_SIM_OR_QPU
+                - BLUE_QUANTUM_GPU_ONLY
+                - MAX_QUANTUM_QPU_ONLY
+            max_circuit_depth:
+              type: integer
+
+    HielExecuteRequest:
+      type: object
+      required:
+        - job_id
+        - pstep_envelope_ref
+        - execution_policy
+        - payload_ir
+      properties:
+        job_id:
+          type: string
+        pstep_envelope_ref:
+          type: string
+          format: uri
+        execution_policy:
+          type: object
+          required:
+            - fallback_order
+            - fidelity_threshold
+          properties:
+            fallback_order:
+              type: array
+              items:
+                type: string
+            fidelity_threshold:
+              type: number
+              minimum: 0
+              maximum: 1
+        payload_ir:
+          oneOf:
+            - $ref: '#/components/schemas/MaxQuboIR'
+            - $ref: '#/components/schemas/MaxCircuitIR'
+
+    HielExecuteResponse:
+      type: object
+      required:
+        - job_id
+        - status
+        - executed_backend
+        - telemetry
+        - results
+        - sovereign_attestation
+      properties:
+        job_id:
+          type: string
+        status:
+          type: string
+          enum: ["COMPLETED_MITIGATED", "COMPLETED_RAW", "REROUTED_SIMULATOR"]
+        executed_backend:
+          type: string
+        telemetry:
+          type: object
+          required:
+            - queue_time_ms
+            - execution_time_ms
+            - raw_fidelity_estimate
+            - mitigated_fidelity_estimate
+          properties:
+            queue_time_ms:
+              type: number
+            execution_time_ms:
+              type: number
+            raw_fidelity_estimate:
+              type: number
+            mitigated_fidelity_estimate:
+              type: number
+        results:
+          type: object
+          required:
+            - mitigated_expectation_values
+            - quasi_probability_distribution
+          properties:
+            mitigated_expectation_values:
+              type: object
+              additionalProperties:
+                type: number
+            quasi_probability_distribution:
+              type: object
+              additionalProperties:
+                type: number
+        sovereign_attestation:
+          type: object
+          required:
+            - signed_by
+            - ml_dsa_65_sig_b64
+          properties:
+            signed_by:
+              type: string
+            ml_dsa_65_sig_b64:
+              type: string
+              contentEncoding: base64
