@@ -2,7 +2,7 @@ import React from 'react';
 import { MAXQGA_REPORTED_SWEEP as sweep } from './maxqgaSweep';
 
 export default function ReportedSweep() {
-  return <details className="reported-sweep">
+  return <details id="qga-sweep" className="reported-sweep">
     <summary>Reported depth-50 sweep</summary>
     <p className="quiet">{sweep.sweepId} · {sweep.registryId} · User-supplied summary; search logs have not been verified.</p>
     <div className="distortion-results">

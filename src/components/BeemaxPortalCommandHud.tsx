@@ -115,6 +115,7 @@ export const BeemaxPortalCommandHud: React.FC = () => {
         <button type="button" onClick={() => setWalletOptInRequested(value => !value)}>{walletOptInRequested ? 'Return to Wallet-Free Mode' : 'Opt-In Wallet (When Ready)'}</button>
       </header>
       <nav aria-label="Portal Scopes">{SCOPES.map(item => <button key={item} type="button" onClick={() => setScope(item)}>{item}</button>)}</nav>
+      {(scope === 'MAX-SPACES' || scope === 'MAX-CHESS') && <section aria-label="MAX-QGA chess space"><h2>MAX-QGA DISTORTION * MAX CHESS ENGINE</h2><p>Explore the chess board, registry anchors, and MAX-QGA scenarios.</p><a href="/#/chess">Open MAX-QGA chess ↗</a></section>}
       <section><h2>Release Anchor &amp; Cover Asset</h2><p>The Crown of Return (<code>{RELEASE_ID}</code>) — 30.00 USDC — 500 editions</p><img src="/assets/crown-cover.png" alt="The Crown of Return Cover" width={160} height={220} /></section>
       <section><h2>MAX-INSTITUTE Gateways (G1–G7)</h2><select value={gateway} onChange={event => setGateway(event.target.value)}>{GATEWAYS.map(item => <option key={item}>{item}</option>)}</select></section>
       <section><h2>HLS Live Stream Stage</h2><label>HTTPS stream URL <input type="url" placeholder="https://example.com/live/stream.m3u8" value={streamInput} onChange={event => setStreamInput(event.target.value)} /></label><button type="button" onClick={() => {

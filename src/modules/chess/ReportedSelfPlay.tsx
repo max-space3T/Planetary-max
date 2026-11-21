@@ -3,7 +3,7 @@ import { MAXQGA_REPORTED_SELF_PLAY as batch } from './maxqgaSelfPlay';
 
 export default function ReportedSelfPlay() {
   const { results, behavioral_tiers: tiers } = batch;
-  return <details className="reported-sweep">
+  return <details id="qga-selfplay" className="reported-sweep">
     <summary>Reported self-play batch</summary>
     <p className="quiet">{batch.batch_id} · User-supplied summary; individual game records have not been verified.</p>
     <p className="quiet">{batch.total_games} games · {batch.baseline_games} baseline · {batch.batch_games} batch</p>

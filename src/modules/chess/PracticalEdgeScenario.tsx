@@ -11,7 +11,7 @@ export default function PracticalEdgeScenario({ fen, nodeId, candidateMoves }: P
   const [error, setError] = useState('');
   const visible = result?.fen === fen ? result : null;
 
-  return <details className="distortion-scenario">
+  return <details id="qga-edge" className="distortion-scenario">
     <summary>MAX-QGA practical edge estimate</summary>
     <p className="quiet">Enter a base evaluation and depth to model the supplied formula. This estimate does not run a depth search; legal moves come from the current board.</p>
     <form onSubmit={event => {

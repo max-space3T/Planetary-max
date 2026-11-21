@@ -26,7 +26,7 @@ RELEASE_ANCHOR_ID = "3c8ee1c4-79b8-4bfd-be18-430679f452f2"
 [[d1_databases]]
 binding = "DB"
 database_name = "planetary-max-db"
-database_id = "cb3feb4d-3cf4-4126-b495-ff4095fe3f97"
+database_id = "e0ebaaef-e2a0-464a-8e7a-6069053bb246"
 
 [[kv_namespaces]]
 binding = "KV_BINDING"

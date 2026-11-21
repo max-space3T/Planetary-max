@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { createRequire } from 'node:module';
-import { readFileSync, readdirSync } from 'node:fs';
+import { applyLegacyFixtureMigrations } from './migration-fixture';
 import { sign } from 'hono/jwt';
 import app from '../planetary-max';
 const { DatabaseSync } = createRequire(import.meta.url)('node:sqlite');
@@ -22,7 +22,7 @@ async function req(path: string, method = 'GET', body?: unknown, admin = true, b
   if (admin) headers.Cookie = `max_admin=${await sign({ role: 'admin', exp: Math.floor(Date.now()/1000)+60 }, secret, 'HS256')}`;
   return app.request(`https://max.test${path}`, { method, headers, body: body === undefined ? undefined : JSON.stringify(body) }, bindings as never);
 }
-beforeEach(() => { db = new DatabaseSync(':memory:'); db.exec('PRAGMA foreign_keys=ON'); for (const name of readdirSync('migrations').filter(n => n.endsWith('.sql')).sort()) db.exec(readFileSync(`migrations/${name}`, 'utf8')); });
+beforeEach(() => { db = new DatabaseSync(':memory:'); db.exec('PRAGMA foreign_keys=ON'); applyLegacyFixtureMigrations(db); });
 afterEach(() => { db.close(); });
 describe('digital catalog', () => {
   it('stores bounded HTTPS video and screenshot previews for public published releases', async () => {

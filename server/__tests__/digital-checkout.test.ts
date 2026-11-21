@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { createRequire } from 'node:module';
-import { readFileSync, readdirSync } from 'node:fs';
+import { applyLegacyFixtureMigrations } from './migration-fixture';
 import { createHash } from 'node:crypto';
 import { privateKeyToAccount } from 'viem/accounts';
 import { sign } from 'hono/jwt';
@@ -31,7 +31,7 @@ function rpc(override: Record<string, unknown> = {}) {
 async function verify(productId = 'game', txHash = tx, message?: string, origin = 'https://max.test', customBindings: any = bindings()) {
   return app.request('https://max.test/api/catalog/verify-usdc', { method: 'POST', headers: { Origin: origin, 'Content-Type': 'application/json' }, body: JSON.stringify({ productId, txHash, buyerAddress: buyer.address, signature: await buyer.signMessage({ message: message || digitalCheckoutMessage('https://max.test', productId, txHash, buyer.address) }) }) }, customBindings as never);
 }
-beforeEach(() => { aggregateChanges=false; db = new DatabaseSync(':memory:'); db.exec('PRAGMA foreign_keys=ON'); for (const file of readdirSync('migrations').filter(n => n.endsWith('.sql')).sort()) db.exec(readFileSync(`migrations/${file}`, 'utf8')); });
+beforeEach(() => { aggregateChanges=false; db = new DatabaseSync(':memory:'); db.exec('PRAGMA foreign_keys=ON'); applyLegacyFixtureMigrations(db); });
 afterEach(() => { vi.restoreAllMocks(); db.close(); });
 describe('direct digital settlement', () => {
   it('issues a wallet-bound edition receipt, protects delivery and recovers the same acquisition', async () => {

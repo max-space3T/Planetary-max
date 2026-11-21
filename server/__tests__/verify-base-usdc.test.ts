@@ -1,4 +1,7 @@
-import { verifyBaseUsdcTransfer } from '../server/verify-base-usdc';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import { verifyBaseUsdcTransfer } from '../verify-base-usdc';
+
+afterEach(() => vi.restoreAllMocks());
 
 const recipient = '0x1111111111111111111111111111111111111111';
 const sender = '0x2222222222222222222222222222222222222222';
