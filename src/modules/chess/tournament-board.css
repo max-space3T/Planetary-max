@@ -1,0 +1,26 @@
+.chess-board-panel .chess-canvas {
+  background: #222920;
+}
+.chess-canvas .fallback-board {
+  width: min(408px, 100%);
+  grid-template-rows: repeat(8, minmax(0, 1fr));
+  border: 6px solid #526a43;
+  box-shadow: 0 5px 18px #0007;
+}
+.chess-canvas .fallback-board button {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  min-height: 0;
+}
+.chess-canvas .fallback-board button.light { background: #f0f2e7; }
+.chess-canvas .fallback-board button.dark { background: #779556; }
+.chess-canvas .fallback-board button.legal { background: #bed077; }
+.chess-canvas .fallback-board button.selected { box-shadow: inset 0 0 0 4px #e1cf5e; }
+.staunton-piece {
+  width: 94%;
+  height: 94%;
+  display: block;
+  object-fit: contain;
+  pointer-events: none;
+}

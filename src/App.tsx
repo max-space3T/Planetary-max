@@ -1,7 +1,6 @@
 import React, { Suspense, useEffect, useState } from 'react';
 import { CollectorVault } from './modules/art/CollectorCheckout';
 import BeemaxPortalCommandHud from './components/BeemaxPortalCommandHud';
-import { BeemaxHubIteration } from './components/BeemaxHubIteration';
 import MaxSportsUserHud from './modules/sports/MaxSportsUserHud';
 import PortalOS1Layout from './core/PortalOS1Layout';
 
@@ -50,7 +49,7 @@ export default function App() {
     if (!isAuthorizedCommandSession) {
       return (
         <PortalOS1Layout>
-          <main
+          <div
             style={{
               background: '#070b14',
               color: '#e2e8f0',
@@ -98,7 +97,7 @@ export default function App() {
                 Return to Public Hub
               </button>
             </section>
-          </main>
+          </div>
         </PortalOS1Layout>
       );
     }
@@ -116,9 +115,5 @@ export default function App() {
     );
   }
 
-  return (
-    <PortalOS1Layout>
-      <BeemaxHubIteration />
-    </PortalOS1Layout>
-  );
+  return <PortalOS1Layout />;
 }

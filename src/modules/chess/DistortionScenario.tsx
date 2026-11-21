@@ -9,7 +9,7 @@ export default function DistortionScenario({ fen, nodeId, legalMovesCount }: Pro
   const [error, setError] = useState('');
   const visible = result?.fen === fen ? result.metrics : null;
 
-  return <details className="distortion-scenario">
+  return <details id="qga-distortion" className="distortion-scenario">
     <summary>MAX-QGA distortion scenario</summary>
     <p className="quiet">Legal moves come from the board. Enter the tension count and remaining time for this scenario.</p>
     <form onSubmit={event => {
