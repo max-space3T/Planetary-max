@@ -30,7 +30,11 @@ database_id = "e0ebaaef-e2a0-464a-8e7a-6069053bb246"
 
 [[kv_namespaces]]
 binding = "KV_BINDING"
-id = "9c1c8f836dca4d829de41e393e38fa0a"
+id = "3ecfafaa730a4ac5881fc26ad9695d54"
+
+[[kv_namespaces]]
+binding = "SESSIONS_KV"
+id = "3ecfafaa730a4ac5881fc26ad9695d54"
 
 [[ratelimits]]
 name = "ADMIN_LOGIN_LIMITER"
