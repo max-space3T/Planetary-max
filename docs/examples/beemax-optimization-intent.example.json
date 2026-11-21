@@ -1,0 +1,12 @@
+{
+  "session_id": "sess-beemax-7741",
+  "workspace_context": {
+    "active_module": "MAX-SPORTS",
+    "state_snapshot_hash": "7c9e6679-7425-40de-944b-e07fc1f90ae7"
+  },
+  "intent": {
+    "mode": "HYBRID_OPTIMIZATION",
+    "prompt": "Optimize multi-leg portfolio variance under sovereign latency constraints",
+    "symbolic_rules": ["MAX_EXPOSURE <= 0.15", "REQUIRE_PQC_ATTESTATION == true"]
+  }
+}

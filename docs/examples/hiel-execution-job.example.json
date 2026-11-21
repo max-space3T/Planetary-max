@@ -1,0 +1,16 @@
+{
+  "job_id": "hiel-job-5509",
+  "pstep_envelope_ref": "urn:uuid:8f4e2a10-9c3b-4d7e-a120-55b9e01c7742",
+  "execution_policy": {
+    "fallback_order": [
+      "blue-quantum://gpu-tensor-sim-01",
+      "max-quantum://qpu-trapped-ion-02",
+      "max-quantum://qpu-superconducting-01"
+    ],
+    "fidelity_threshold": 0.96
+  },
+  "payload_ir": {
+    "ir_type": "MAX-Circuit-IR",
+    "circuit_id": "circ-9012-bell-mitigated"
+  }
+}

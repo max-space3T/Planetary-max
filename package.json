@@ -9,6 +9,7 @@
     "db:migrate": "wrangler d1 migrations apply planetary-max-db --remote",
     "deploy": "npm run build && wrangler deploy",
     "test": "vitest run",
+    "test:beemax": "vitest run --config vitest.beemax.config.ts",
     "db:migrate:local": "wrangler d1 migrations apply planetary-max-db --local",
     "typecheck": "tsc --noEmit",
     "preview:worker": "wrangler dev --local --port 8787",
