@@ -1,0 +1,67 @@
+.architecture-view { padding-bottom: 24px; }
+.architecture-intro {
+  min-height: 220px; display: flex; align-items: center; justify-content: space-between;
+  gap: 24px; padding: 32px; border: 1px solid #455640; border-radius: 12px;
+  background: radial-gradient(circle at 85% 50%, #4a603d 0, transparent 38%), #1b241a;
+}
+.architecture-kicker { color: #bfe69c; font-size: 10px; font-weight: 700; letter-spacing: .12em; }
+.architecture-intro h2, .architecture-heading h2 { margin: 12px 0; font: 500 clamp(25px, 3vw, 38px) 'Space Grotesk', sans-serif; letter-spacing: -.04em; }
+.architecture-intro p, .architecture-layer p, .architecture-note { color: #becbb8; line-height: 1.65; font-size: 13px; }
+.architecture-intro p { max-width: 560px; margin-bottom: 0; }
+.architecture-open-tools { margin-top: 18px; }
+.architecture-orbit { position: relative; flex: none; display: grid; place-items: center; width: 125px; height: 125px; color: #d4f8a8; font-size: 56px; }
+.architecture-orbit i { position: absolute; inset: 4px; border: 1px solid #b6df8a88; border-radius: 50%; transform: rotateX(60deg) rotateZ(35deg); }
+.architecture-orbit i:last-child { transform: rotateY(60deg) rotateZ(-35deg); }
+.architecture-heading { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin: 36px 0 18px; }
+.architecture-heading h2 { font-size: 26px; margin: 8px 0 0; }
+.architecture-heading h2 span { color: #c8f477; }
+.architecture-heading > span { font-size: 9px; letter-spacing: .1em; color: #91a28a; }
+.architecture-layers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.architecture-layer { padding: 20px; border: 1px solid #394737; border-radius: 9px; background: #1a2019; }
+.architecture-layer > div { display: flex; justify-content: space-between; gap: 10px; color: #a8bf9b; font-size: 9px; font-weight: 700; letter-spacing: .1em; }
+.architecture-layer h3 { font: 500 19px 'Space Grotesk', sans-serif; margin: 20px 0 8px; }
+.architecture-layer p { margin: 0; }
+.architecture-access { border-top: 1px solid #354032; margin-top: 36px; }
+.architecture-view .operator-access { margin: 0 0 18px; }
+.architecture-view .operator-access > button, .architecture-view .operator-access form button {
+  padding: 11px 16px; border-radius: 6px; background: #c7f477; color: #182112; border: 1px solid #c7f477; font-weight: 700;
+}
+.architecture-view .operator-access form { max-width: 500px; margin-top: 16px; padding: 20px; border: 1px solid #405139; border-radius: 9px; background: #1a2019; }
+.architecture-view .operator-access form h2 { font-size: 20px; }
+.architecture-view .operator-access label, .architecture-view .architecture-fields label, .routing-studio fieldset > label:not(.architecture-check) { display: grid; gap: 8px; color: #d9e5d3; font-size: 12px; }
+.architecture-view input:not([type='checkbox']), .architecture-view select, .architecture-view textarea {
+  width: 100%; padding: 10px; color: #f1f5ed; background: #111710; border: 1px solid #52634a; border-radius: 6px; font: inherit;
+}
+.architecture-view .operator-access form label { margin: 16px 0; }
+.architecture-tools { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; align-items: start; }
+.architecture-view .beemax-panel, .architecture-panel { min-width: 0; padding: 24px; border: 1px solid #405139; border-radius: 10px; background: #1a2019; }
+.architecture-view .beemax-panel .panel-header, .architecture-view .beemax-panel .panel-title { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.architecture-view .beemax-panel .panel-icon { color: #c8f477; font-size: 28px; }
+.architecture-view .beemax-panel h3, .architecture-panel h2 { margin: 5px 0; font: 500 22px 'Space Grotesk', sans-serif; }
+.architecture-view .beemax-panel .panel-header p, .architecture-panel header p { margin: 5px 0; color: #aebca7; font-size: 12px; line-height: 1.5; }
+.architecture-view .beemax-panel button:not(.neon-button) { padding: 9px; color: #d6e6ca; background: #2b3825; border: 1px solid #53674a; border-radius: 5px; }
+.architecture-view .beemax-messages { margin: 20px 0; min-height: 200px; max-height: 350px; overflow: auto; }
+.architecture-view .beemax-welcome > span { color: #c8f477; font-size: 30px; }
+.architecture-view .beemax-welcome h2 { font-size: 20px; margin: 8px 0; }
+.architecture-view .beemax-welcome p, .architecture-view .beemax-panel small { color: #aebca7; line-height: 1.5; }
+.architecture-view .beemax-welcome > div { display: flex; flex-wrap: wrap; gap: 6px; }
+.architecture-view .beemax-message { margin: 12px 0; padding: 12px; background: #252f22; border-radius: 6px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.architecture-view .beemax-panel form label { display: block; margin-bottom: 8px; }
+.architecture-view .beemax-panel form > div { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 10px; }
+.routing-studio fieldset { padding: 0; margin: 20px 0 0; border: 0; display: grid; gap: 14px; }
+.architecture-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.architecture-check { display: flex; align-items: center; gap: 8px; color: #d9e5d3; font-size: 12px; }
+.architecture-signal-list { display: grid; gap: 10px; }
+.routing-studio button { justify-self: start; }
+.routing-result { margin-top: 16px; padding: 16px; border: 1px solid #647f51; border-radius: 8px; background: #222e20; overflow-wrap: anywhere; }
+.routing-result h3 { margin: 10px 0; font-size: 16px; }
+.routing-result p { color: #d2dfcb; font-size: 12px; line-height: 1.6; }
+.routing-result strong { color: #dbecbc; font-size: 11px; }
+.architecture-error { color: #ffd3c3; }
+@media(max-width: 900px) { .architecture-layers { grid-template-columns: repeat(2, minmax(0, 1fr)); } .architecture-tools { grid-template-columns: 1fr; } }
+@media(max-width: 560px) { .architecture-intro { padding: 22px; } .architecture-orbit { display: none; } .architecture-layers, .architecture-fields { grid-template-columns: 1fr; } .architecture-heading > span { display: none; } }
+@media(max-width: 560px) {
+  .os-shell .mobile-nav { gap: 0; padding: 0; }
+  .os-shell .mobile-nav button { flex: 1 1 0; min-width: 0; padding: 0 1px; }
+  .os-shell .mobile-nav button small { font-size: 7px; line-height: 1.05; overflow-wrap: anywhere; }
+}
