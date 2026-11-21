@@ -2,7 +2,7 @@ import React, { createContext, useContext, useEffect, useRef, useState } from 'r
 const AccessContext = createContext(false);
 export function useAdministrator() { return useContext(AccessContext); }
 // Visitors always see the public command center. Operators can opt in to sign-in.
-export default function AdminAccess({ children }: { children: React.ReactNode }) {
+export default function AdminAccess({ children, signInButtonLabel = 'Sign in to publishing desk', signInDescription = 'Sign in to publish and manage MAX. Public browsing stays open.' }: { children: React.ReactNode; signInButtonLabel?: string; signInDescription?: string }) {
   const [authenticated, setAuthenticated] = useState(false); const [checking, setChecking] = useState(true);
   const [showSignIn, setShowSignIn] = useState(false); const [password, setPassword] = useState('');
   const [error, setError] = useState(''); const [busy, setBusy] = useState(false);
@@ -34,5 +34,5 @@ export default function AdminAccess({ children }: { children: React.ReactNode })
       setAuthenticated(true); setShowSignIn(false); setPassword('');
     } catch (e) { setError(e instanceof Error ? e.message : 'Unable to sign in.'); }
     finally { interacting.current = false; setBusy(false); }
-  }}><h2>Operator sign-in</h2><p>Sign in to publish and manage MAX. Public browsing stays open.</p><label>Administrator password<input type="password" autoComplete="current-password" required maxLength={1024} value={password} onChange={e => setPassword(e.target.value)}/></label><button disabled={busy}>{busy ? 'Signing in…' : 'Sign in to publishing desk'}</button></form>}{error && <p role="alert">{error}</p>}</div>{children}</AccessContext.Provider>;
+  }}><h2>Operator sign-in</h2><p>{signInDescription}</p><label>Administrator password<input type="password" autoComplete="current-password" required maxLength={1024} value={password} onChange={e => setPassword(e.target.value)}/></label><button disabled={busy}>{busy ? 'Signing in…' : signInButtonLabel}</button></form>}{error && <p role="alert">{error}</p>}</div>{children}</AccessContext.Provider>;
 }
