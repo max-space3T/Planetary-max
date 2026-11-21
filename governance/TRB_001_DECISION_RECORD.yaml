@@ -1,0 +1,15 @@
+# User-supplied decision summary; signer and underlying records were not provided.
+decision_id: TRB-001
+project_id: PROJECT_MC-001_MAXQGA
+registry_id: MAXQGA_FENREGISTRY_V1_20261016
+previous_tier: TIER_C_EXPERIMENTAL
+promoted_tier: TIER_B_STRONG_CANDIDATE
+theory_status: FROZEN
+verdict: APPROVED_FOR_TIER_B_RELEASE
+metrics_snapshot:
+  depth_50_avg_stability: 79.1
+  refutation_rate_pct: 2.8
+  self_play_sample_size: 500
+  self_play_win_pct: 40.8
+  self_play_draw_pct: 37.4
+  self_play_loss_pct: 21.8

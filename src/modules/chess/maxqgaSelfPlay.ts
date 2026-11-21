@@ -1,0 +1,14 @@
+/** User-supplied self-play summary; individual game records have not been verified. */
+export const MAXQGA_REPORTED_SELF_PLAY = Object.freeze({
+  batch_id: 'SP500_BATCH_002',
+  total_games: 500,
+  baseline_games: 100,
+  batch_games: 400,
+  results: Object.freeze({ wins: 204, draws: 187, losses: 109, win_rate_percent: 40.8, draw_rate_percent: 37.4, loss_rate_percent: 21.8, combined_non_loss_percent: 78.2 }),
+  behavioral_tiers: Object.freeze({
+    '1600_1900': Object.freeze({ collapse_vector: 'EARLY_TACTICAL_BLUNDER', effectiveness: 'CRITICAL', win_draw_rate_percent: 92.0 }),
+    '1900_2200': Object.freeze({ collapse_vector: 'CLOCK_EXHAUSTION_LT_2MIN', effectiveness: 'HIGH', distortion_rate_percent: 84.0 }),
+    '2200_2400_plus': Object.freeze({ collapse_vector: 'POSITIONAL_OVER_EXTENSION', effectiveness: 'STRONG', state: 'DYNAMIC_BALANCE' }),
+    super_gm_engine: Object.freeze({ collapse_vector: 'PRECISE_DEFENSIVE_RESOURCE', effectiveness: 'STABLE', equivalence: 'TIER_B' }),
+  }),
+} as const);

@@ -1,0 +1,15 @@
+{
+  "sweep_id": "D50_SWEEP_V1",
+  "registry_id": "MAXQGA_FENREGISTRY_V1_20261016",
+  "search_depth": 50,
+  "average_stability_score": 79.1,
+  "refutation_rate_percent": 2.8,
+  "tier_verdict": "TIER_B_STRONG_CANDIDATE",
+  "nodes": [
+    { "node_id": "MX-EV-001", "stability": 81.4, "verdict": "SURVIVES_DYNAMIC" },
+    { "node_id": "MX-EV-002", "stability": 79.8, "verdict": "SURVIVES_DYNAMIC" },
+    { "node_id": "MX-EV-003", "stability": 78.6, "verdict": "SURVIVES_DYNAMIC" },
+    { "node_id": "MX-EV-004", "stability": 77.2, "verdict": "SURVIVES_SPECULATIVE" },
+    { "node_id": "MX-EV-005", "stability": 78.5, "verdict": "SURVIVES_DYNAMIC" }
+  ]
+}
