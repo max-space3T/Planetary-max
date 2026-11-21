@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 
 // Lathed profiles give each piece the turned base and collar of a Staunton set.
-export function createStauntonPiece(type: string, material: THREE.Material, track: <T extends THREE.BufferGeometry>(geometry: T) => T) {
+export function createStauntonPiece(type: string, material: THREE.Material, track: <T extends THREE.BufferGeometry>(geometry: T) => T, segments = 32) {
   const group = new THREE.Group();
   const add = (geometry: THREE.BufferGeometry, x = 0, y = 0, z = 0) => {
     const mesh = new THREE.Mesh(track(geometry), material);
@@ -9,7 +9,7 @@ export function createStauntonPiece(type: string, material: THREE.Material, trac
     group.add(mesh);
     return mesh;
   };
-  const lathe = (points: [number, number][]) => add(new THREE.LatheGeometry(points.map(([x, y]) => new THREE.Vector2(x, y)), 32));
+  const lathe = (points: [number, number][]) => add(new THREE.LatheGeometry(points.map(([x, y]) => new THREE.Vector2(x, y)), segments));
   lathe([[0,0],[.32,0],[.37,.025],[.37,.09],[.34,.13],[.30,.14],[.30,.18],[.26,.21],[.22,.22]]);
   if (type === 'n') {
     lathe([[.22,.22],[.25,.25],[.24,.30],[.19,.34],[.17,.40]]);
@@ -26,7 +26,7 @@ export function createStauntonPiece(type: string, material: THREE.Material, trac
   const h = heights[type] ?? .64;
   lathe([[.22,.22],[.26,.25],[.26,.29],[.21,.32],[.16,.36],[.12,h-.22],[.17,h-.18],[.20,h-.15],[.20,h-.11],[.15,h-.09]]);
   if (type === 'p') {
-    add(new THREE.SphereGeometry(.14, 24, 16), 0, h-.01);
+    add(new THREE.SphereGeometry(.14, segments, Math.max(6, Math.floor(segments / 2))), 0, h-.01);
   } else if (type === 'r') {
     lathe([[.15,h-.12],[.24,h-.12],[.24,h-.02],[.20,h+.02],[.20,h+.08],[.14,h+.08],[.14,h+.02]]);
     for (let i=0;i<4;i++) {
