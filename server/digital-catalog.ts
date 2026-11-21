@@ -1,6 +1,7 @@
 import type { Hono, MiddlewareHandler } from 'hono';
 import { z } from 'zod';
 import { domains } from '../src/kernel/router';
+import { classifyRoutingRequest, routingRequest } from './routing-policy';
 
 export type AssistantMessage = { role: 'user' | 'assistant'; content: string };
 export type EcosystemBindings = {
@@ -80,6 +81,13 @@ export function registerEcosystem<E extends { Bindings: EcosystemBindings }>(app
   });
   app.use('/api/admin/beemax/*', requireAdmin);
   app.get('/api/admin/beemax/config', c => c.json({ configured: Boolean(c.env.AI && c.env.BEEMAX_LIMITER), provider: 'Cloudflare Workers AI' }));
+  app.post('/api/admin/beemax/route', async c => {
+    let parsed;
+    try { parsed = routingRequest.safeParse(await c.req.json()); } catch { return c.json({ error: 'Send normalized routing metadata as JSON.' }, 400); }
+    if (!parsed.success) return c.json({ error: 'Invalid routing metadata.' }, 400);
+    c.header('Cache-Control', 'no-store');
+    return c.json(classifyRoutingRequest(parsed.data));
+  });
   app.post('/api/admin/beemax/chat', async c => {
     if (!c.env.AI || !c.env.BEEMAX_LIMITER) return c.json({ error: 'BEEMAX needs the Workers AI binding and request limiter configured on this Worker.' }, 503);
     let parsed;
